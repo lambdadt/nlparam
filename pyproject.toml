@@ -1,0 +1,21 @@
+[project]
+name = "nlparam"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "dataclasses-json>=0.6.7",
+    "numpy>=2.2.6",
+    "openai==1.16.2",
+    "python-dotenv>=1.1.1",
+    "scikit-learn>=1.7.2",
+    "scipy>=1.15.3",
+    "sentence-transformers>=5.1.2",
+    "tf-keras>=2.20.1",
+    "torch>=2.9.0",
+    "torchaudio>=2.9.0",
+    "torchvision>=0.24.0",
+    "tqdm>=4.67.1",
+    "transformers>=4.57.1",
+]

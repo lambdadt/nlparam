@@ -10,8 +10,12 @@ from transformers import GPT2Tokenizer
 import random
 import concurrent.futures
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.organization = os.environ["OPENAI_ORG"]
+#openai.organization = os.environ["OPENAI_ORG"]
 GPT2TOKENIZER = GPT2Tokenizer.from_pretrained("gpt2")
 
 MAX_LIMIT = 5
@@ -149,6 +153,7 @@ def single_chat_gpt_wrapper(args) -> Union[None, str]:
     client = openai.OpenAI(
         # This is the default and can be omitted
         api_key=os.environ.get("OPENAI_API_KEY"),
+        base_url=os.environ.get("OPENAI_BASE_URL")
     )
 
     for _ in range(10):
