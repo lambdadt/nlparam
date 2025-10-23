@@ -14,7 +14,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-openai.api_key = os.environ["OPENAI_API_KEY"]
+get_openai_api_key = lambda: os.getenv('NLPARAM_OPENAI_API_KEY', os.environ.get("OPENAI_API_KEY", ""))
+get_openai_base_url = lambda: os.getenv('NLPARAM_OPENAI_BASE_URL', os.environ.get("OPENAI_BASE_URL", ""))
+openai.api_key = get_openai_api_key()
 #openai.organization = os.environ["OPENAI_ORG"]
 GPT2TOKENIZER = GPT2Tokenizer.from_pretrained("gpt2")
 
@@ -152,8 +154,8 @@ def single_chat_gpt_wrapper(args) -> Union[None, str]:
 
     client = openai.OpenAI(
         # This is the default and can be omitted
-        api_key=os.environ.get("OPENAI_API_KEY"),
-        base_url=os.environ.get("OPENAI_BASE_URL")
+        api_key=get_openai_api_key(),
+        base_url=get_openai_base_url()
     )
 
     for _ in range(10):

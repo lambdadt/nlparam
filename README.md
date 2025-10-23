@@ -19,6 +19,8 @@ pip install -e .
 
 ### Quick start
 
+Set environment variables: `NLPARAM_OPENAI_API_KEY` and `NLPARAM_OPENAI_BASE_URL` (you may use a `.env` file.)
+
 Run the models with the following imports:
 
 ```from nlparam import run_clustering, run_time_series, run_classification``` 
