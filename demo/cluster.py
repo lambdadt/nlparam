@@ -9,6 +9,8 @@ if __name__ == '__main__':
         texts: List[str] = json.load(f)
     K: int = 5
     goal: str = "I want to cluster these math problems based on the type of skills required to solve them."
+    print("Data path: {}".format(data_path))
+    print("#Total texts: {}".format(len(texts)))
 
     clustering_result = run_clustering(texts, K, goal)
     predicate2text2matching: Dict[str, Dict[str, int]] = clustering_result["predicate2text2matching"]

@@ -475,13 +475,13 @@ class GPTValidator(Validator):
         self.model_name = model
 
         if template_path is None:
-            if "gpt" in model:
+            if True:#"gpt" in model:
                 template_path = GPT_TEMPLATE
             else:
                 raise ValueError(f"Unknown model {model}")
 
         if multi_assigner_template_path is None:
-            if "gpt" in model:
+            if True:#"gpt" in model:
                 multi_assigner_template_path = T5_MULTI_ASSIGNER_TEMPLATE
             else:
                 raise ValueError(f"Unknown model {model}")
@@ -580,12 +580,10 @@ class GPTValidator(Validator):
 def get_validator_by_name(model_name, **kwargs):
     if "t5" in model_name:
         return D5Validator(model_name)
-    elif "gpt" in model_name:
-        return GPTValidator(model_name)
     elif model_name == "dummy":
         return DummyValidator()
     else:
-        raise ValueError(f"Unknown validator {model_name}")
+        return GPTValidator(model_name)
 
 
 def validate_descriptions(

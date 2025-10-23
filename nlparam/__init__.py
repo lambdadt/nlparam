@@ -2,13 +2,18 @@ from pathlib import Path
 from .nlparam_logging import logger
 import numpy as np
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Get the current file's directory.
 current_directory = Path(__file__)
 TEMPLATE_DIRECTORY = current_directory.parent / "templates"
 DATA_DIR = current_directory.parent.parent / "data"
-DEFAULT_VALIDATOR_NAME = "gpt-4o-mini"
+DEFAULT_VALIDATOR_NAME = os.getenv('NLPARAM_OPENAI_MODEL_VALIDATOR', os.getenv('NLPARAM_OPENAI_MODEL', "gpt-4o-mini"))
 DEFAULT_EMBEDDER_NAME = "hkunlp/instructor-xl"
-DEFAULT_PROPOSER_NAME = "gpt-4o"
+DEFAULT_PROPOSER_NAME = os.getenv('NLPARAM_OPENAI_MODEL_PROPOSER', os.getenv('NLPARAM_OPENAI_MODEL', "gpt-4o"))
 EXPERIMENT_VALIDATOR_NAME = "google/flan-t5-xl"
 EXPERIMENT_PROPOSER_NAME = "gpt-3.5-turbo-0613"
 DEFAULT_LLM_CONFIG = {

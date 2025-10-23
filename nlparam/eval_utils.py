@@ -5,7 +5,10 @@ import scipy
 from nlparam import query_wrapper
 from nlparam import TEMPLATE_DIRECTORY
 import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
 
 def find_pair_wise_f_score(gold_tdm, predicted_tdm):
     gold_tdm, predicted_tdm = np.array(gold_tdm), np.array(predicted_tdm)
@@ -211,9 +214,11 @@ def is_null_description(s):
 
 
 def get_similarity_scores(
-    texts_a: List[str], texts_b: List[str], model: str = "gpt-4o"
+    texts_a: List[str], texts_b: List[str], model: str = None
 ) -> List[int]:
     assert len(texts_a) == len(texts_b)
+    if model is None:
+        model = os.getenv('NLPARAM_OPENAI_MODEL_EVAL', os.getenv('NLPARAM_OPENAI_MODEL', 'gpt-4o'))
 
     results = [1 if text_a == text_b else 0 for text_a, text_b in zip(texts_a, texts_b)]
 

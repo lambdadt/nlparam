@@ -10,6 +10,7 @@ import os
 from nlparam import logger
 import time
 from itertools import chain
+from dotenv import load_dotenv
 
 
 NUM_MAX_RETRY = 2
@@ -307,7 +308,7 @@ def propose_descriptions_no_score(
     texts: List[str] = None,
     goal: str = None,
     example_descriptions: List[str] = [],
-    model: str = "gpt-4",
+    model: str|None = None,
     num_descriptions_per_prompt: int = 5,
     num_samples: int = -1,
     random_seed: int = 0,
@@ -402,7 +403,7 @@ def propose_descriptions(
     target: List[float] = None,
     goal: str = None,
     example_descriptions: List[str] = [],
-    model: str = "gpt-4",
+    model: str|None = None,
     num_descriptions_per_prompt: int = 5,
     num_samples: int = -1,
     random_seed: int = 0,
@@ -601,12 +602,10 @@ class Proposer:
 
         if "claude" in model_name:
             self.model_family = "claude"
-        elif "gpt" in model_name:
-            self.model_family = "gpt"
         elif model_name == "dummy":
             self.model_family = "dummy"
         else:
-            raise ValueError(f"Unknown model name: {model_name}")
+            self.model_family = "gpt"
 
         self.root_template_path = root_template_path
 

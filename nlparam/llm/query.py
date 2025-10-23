@@ -133,7 +133,7 @@ def get_context_length(model: str) -> int:
     elif "gpt-3.5-turbo" in model:
         return 4096
     else:
-        raise ValueError(f"Unknown model {model}")
+        return 8192
 
 
 DEFAULT_MESSAGE = [
@@ -208,7 +208,7 @@ def chat_gpt_wrapper_parallel(
 
 def query_wrapper(
     prompts: List[str],
-    model: str = "gpt-3.5-turbo", 
+    model: str|None = None, 
     max_tokens: int = 512,
     temperature: float = 0.7,
     top_p: float = 1.0,
@@ -224,7 +224,8 @@ def query_wrapper(
     prompts : List[str]
         List of prompts to query the model with.
     model : str, optional
-        Model to query, by default "gpt-3.5-turbo"
+        Model to query, by default will use value of environment variable
+        'NLPARAM_OPENAI_MODEL' if it exists, else "gpt-3.5-turbo"
     max_tokens : int, optional
         Maximum number of tokens to generate, by default 128
     temperature : float, optional
@@ -240,7 +241,8 @@ def query_wrapper(
         List of generated texts.
     """
     assert type(prompts) == list
-    assert model.startswith("gpt")
+    if model is None:
+        model = os.getenv('NLPARAM_OPENAI_MODEL', 'gpt-3.5-turbo')
 
     args = {
         "temperature": temperature,

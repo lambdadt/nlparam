@@ -19,7 +19,18 @@ pip install -e .
 
 ### Quick start
 
-Set environment variables: `NLPARAM_OPENAI_API_KEY` and `NLPARAM_OPENAI_BASE_URL` (you may use a `.env` file.)
+Set environment variables (you may use a `.env` file.):
+```sh
+NLPARAM_OPENAI_API_KEY=""
+NLPARAM_OPENAI_BASE_URL="http://localhost:11452/v1"
+NLPARAM_OPENAI_MODEL="NousResearch/Meta-Llama-3-8B-Instruct"
+NLPARAM_OPENAI_MODEL_PROPOSER="NousResearch/Meta-Llama-3-8B-Instruct"
+NLPARAM_OPENAI_MODEL_VALIDATOR="NousResearch/Meta-Llama-3-8B-Instruct"
+```
+
+In the original paper `google/flan-t5-xl` is used experimentally as the validator.
+
+-----
 
 Run the models with the following imports:
 
